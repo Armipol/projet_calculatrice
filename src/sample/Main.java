@@ -11,6 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         View view = new View(primaryStage);
+        view.affiche();
     }
 
 

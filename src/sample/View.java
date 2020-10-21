@@ -6,14 +6,19 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class View {
+import java.util.List;
+
+public class View implements IView{
     Stage st;
 
     public View(Stage stage) throws Exception {
         //Définition de la page
         st = stage;
         st.setTitle("Calculatrice");
+    }
 
+    @Override
+    public void affiche() {
         //Création de l'architecture de la page
         GridPane calculatrice = new GridPane();
 
@@ -59,15 +64,22 @@ public class View {
         calculatrice.add(b_push,4,1);
 
 
-        //Implementation dans la VBOx
-        ;
-
         //Création des actions des bouttons
 
 
         //Incrémentation dans la page
         Scene scene_principal = new Scene(calculatrice);
-        stage.setScene(scene_principal);
-        stage.show();
+        st.setScene(scene_principal);
+        st.show();
+    }
+
+    @Override
+    public void change(List<String> liste_affichage) {
+
+    }
+
+    @Override
+    public void change(String affichage_direct) {
+
     }
 }
