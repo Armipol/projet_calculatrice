@@ -1,8 +1,4 @@
 package sample;
-
-import javafx.scene.control.skin.TooltipSkin;
-
-import java.util.ArrayList;
 import java.util.Stack;
 
 public class Accumulateur implements IAccumulateur {
