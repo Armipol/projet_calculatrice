@@ -31,9 +31,13 @@ public class View {
         Button b8 = new Button("8");
         Button b9 = new Button("9");
         Button b0 = new Button("0");
+        Button b_neg = new Button("(-)");
         Button b_add = new Button("+");
-
-
+        Button b_sub = new Button ("-");
+        Button b_mult = new Button ("x");
+        Button b_div = new Button ("/");
+        Button b_push = new Button ("⏎");
+        Button b_backspace = new Button ("⌫");
 
         //Implémentation des touches ( calculatrice.add(column, row) )
         calculatrice.add(b7, 0, 0);
@@ -45,6 +49,15 @@ public class View {
         calculatrice.add(b1, 0, 2);
         calculatrice.add(b2, 1, 2);
         calculatrice.add(b3, 2, 2);
+        calculatrice.add(b0,0, 3);
+        calculatrice.add(b_backspace, 4,0);
+        calculatrice.add(b_add,3,0);
+        calculatrice.add(b_sub,3,1);
+        calculatrice.add(b_mult,3,2);;
+        calculatrice.add(b_div,3,3);;
+        calculatrice.add(b_neg,2,3);
+        calculatrice.add(b_push,4,1);
+
 
         //Implementation dans la VBOx
         ;
