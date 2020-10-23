@@ -11,6 +11,8 @@ import java.util.List;
 
 public class View implements IView{
     Stage st;
+    List<String> liste_affichage;
+    String affichage_direct;
 
     public View(Stage stage) throws Exception {
         //Définition de la page
@@ -64,8 +66,7 @@ public class View implements IView{
         calculatrice.add(b_neg,2,3);
         calculatrice.add(b_push,4,1);
 
-
-        //Création des actions des bouttons
+        //Création des actions des boutons
 
         //Incrémentation dans la page
         Scene scene_principal = new Scene(calculatrice);
@@ -75,11 +76,11 @@ public class View implements IView{
 
     @Override
     public void change(List<String> liste_affichage) {
-
+        this.liste_affichage = liste_affichage;
     }
 
     @Override
     public void change(String affichage_direct) {
-
+        this.affichage_direct = affichage_direct;
     }
 }
