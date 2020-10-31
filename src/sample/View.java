@@ -68,6 +68,7 @@ public class View implements IView{
 
         //Création des actions des boutons
 
+
         //Incrémentation dans la page
         Scene scene_principal = new Scene(calculatrice);
         st.setScene(scene_principal);
