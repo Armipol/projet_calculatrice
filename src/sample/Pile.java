@@ -4,20 +4,20 @@ import java.util.Stack;
 
 public class Pile extends Stack {
 
-    public void push (double nombre) {
-            super.push(nombre);
+    public void push(double nombre) {
+        super.push(nombre);
     }
 
     public Object pop() {
-        if (super.empty()==false) {
+        if (super.empty() == false) {
             return super.pop();
         } else {
             return "La pile est vide";
         }
     }
 
-    public void drop(){
-        if (super.empty()==false) {
+    public void drop() {
+        if (super.empty() == false) {
             super.pop();
         } else {
             System.out.println("La pile est vide");
@@ -35,7 +35,7 @@ public class Pile extends Stack {
         }
     }
 
-    public void clear(){
+    public void clear() {
         super.clear();
     }
 

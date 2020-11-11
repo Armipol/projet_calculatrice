@@ -1,17 +1,23 @@
 package sample;
 
-import java.util.Stack;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class Accumulateur implements IAccumulateur {
 
-    //Attribut pour la réalisation de la calculatrice
-    String nombre = "";
-    Stack pile = new Stack();
+    private String value = "";
+    private String nombre = "";
+    public Pile pile;
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
+    public Accumulateur(Pile pile){
+        this.pile = pile;    }
 
     @Override
     public void push() {
         if (nombre.length() > 0) {
             pile.push(Double.parseDouble(nombre));
+            setValue("");
             nombre = "";
         } else {
             System.out.println("Impossible de push car aucun chiffre");
@@ -28,14 +34,7 @@ public class Accumulateur implements IAccumulateur {
 
     @Override
     public void swap() {
-        if (pile.size() < 2) {
-            System.out.println("Impossible de swaper, il manque des opérandes");
-        } else {
-            double d1 = (double) pile.pop();
-            double d2 = (double) pile.pop();
-            pile.push(d1);
-            pile.push(d2);
-        }
+        pile.swap();
     }
 
     @Override
@@ -46,7 +45,6 @@ public class Accumulateur implements IAccumulateur {
             double d1 = (double) pile.pop();
             double d2 = (double) pile.pop();
             pile.push(d1 + d2);
-            System.out.println(d1 + d2);
         }
     }
 
@@ -99,20 +97,41 @@ public class Accumulateur implements IAccumulateur {
             System.out.println("Impossible de backspace car pas de chiffre");
         } else {
             nombre = nombre.substring(0, nombre.length() - 1);
+            setValue(nombre);
         }
     }
 
     @Override
     public void accumuler(int chiffre) {
         nombre += Integer.toString(chiffre);
+        setValue(nombre);
     }
 
     public void accumuler(String dot) {
         nombre += dot;
+        setValue(nombre);
     }
 
     @Override
     public void reset() {
         pile.empty();
     }
+
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String s_affiche) {
+        String oldValue = this.value;
+        this.value = s_affiche;
+        pcs.firePropertyChange("value", oldValue, s_affiche);
+    }
+
+
+
 }
