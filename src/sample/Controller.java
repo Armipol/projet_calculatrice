@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import java.awt.event.KeyListener;
 
 import java.beans.*;
 import java.util.ArrayList;
@@ -55,8 +56,36 @@ public class Controller extends Application implements PropertyChangeListener, E
         }
     }
 
-
     public void gestion_bouton(int i) {
+        accumulateur.accumuler(i);
+    }
+
+    public void gestion_clavier (String c){
+        if (c == "(-)") {
+            accumulateur.neg();
+        } else if (c == "+") {
+            accumulateur.add();
+        } else if (c == "-") {
+            accumulateur.sub();
+        } else if (c == "*") {
+            accumulateur.mult();
+        } else if (c == "/") {
+            accumulateur.div();
+        } else if (c == "back") {
+            accumulateur.backspace();
+        } else if (c == "push") {
+            accumulateur.push();
+        } else if (c == ".") {
+            accumulateur.accumuler(".");
+        } else if (c == "swap") {
+            accumulateur.swap();
+        } else if (c == "drop") {
+            accumulateur.drop();
+        } else if (c == "clear") {
+            accumulateur.reset();
+        }
+    }
+    public void gestion_clavier(int i) {
         accumulateur.accumuler(i);
     }
 
