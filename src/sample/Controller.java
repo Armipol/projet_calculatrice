@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 import java.beans.*;
+import java.util.ArrayList;
 
 public class Controller extends Application  implements PropertyChangeListener, EventHandler {
     Accumulateur accumulateur;
@@ -19,6 +20,7 @@ public class Controller extends Application  implements PropertyChangeListener, 
         accumulateur = new Accumulateur(pile);
         view.affiche();
         accumulateur.addPropertyChangeListener(this);
+        pile.addPropertyChangeListener(this);
     }
 
 
@@ -58,8 +60,10 @@ public class Controller extends Application  implements PropertyChangeListener, 
         if (propertyChangeEvent.getPropertyName()=="value") {
             view.change((String) propertyChangeEvent.getNewValue());
         }
+        if (propertyChangeEvent.getPropertyName()=="modification") {
+            view.change(pile.liste_valeur);
+        }
     }
-
 
     @Override
     public void handle(Event event) {

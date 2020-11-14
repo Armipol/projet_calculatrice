@@ -17,7 +17,6 @@ public class View implements IView {
     Label affichage_direct = new Label("..");
     Label affichage_pre = new Label("..");
     Label affichage_2_pre = new Label("..");
-    Label error = new Label("error");
 
     Controller view_control;
 
@@ -181,12 +180,15 @@ public class View implements IView {
     }
 
     @Override
-    public void change(ArrayList<String> liste_affichage) {
+    public void change(ArrayList<Double> liste_affichage) {
         int len = liste_affichage.size();
-        if (len > 0) {
-            this.affichage_pre.setText(liste_affichage.get(len - 1));
-        } else if (len > 1) {
-            this.affichage_2_pre.setText(liste_affichage.get(len - 2));
+        if (len > 1) {
+            this.affichage_pre.setText(String.valueOf(liste_affichage.get(len - 1)));
+            this.affichage_2_pre.setText(String.valueOf(liste_affichage.get(len - 2)));
+        }
+        if (len > 0 & len < 2) {
+            this.affichage_2_pre.setText("..");
+            this.affichage_pre.setText(String.valueOf(liste_affichage.get(len - 1)));
         }
     }
 

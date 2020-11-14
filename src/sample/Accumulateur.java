@@ -29,7 +29,7 @@ public class Accumulateur implements IAccumulateur {
         if (pile.size() < 1) {
             System.out.println("Impossible, rien à droper");
         } else
-            pile.pop();
+            pile.drop();
     }
 
     @Override
