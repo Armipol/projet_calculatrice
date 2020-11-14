@@ -48,6 +48,7 @@ public class Pile extends Stack {
             transferer();
             super.push(d1);
             super.push(d2);
+
         } else {
             System.out.println("Impossible de swaper, il manque des opérandes");
         }

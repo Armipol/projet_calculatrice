@@ -114,7 +114,7 @@ public class Accumulateur implements IAccumulateur {
 
     @Override
     public void reset() {
-        pile.empty();
+        pile.clear();
     }
 
 

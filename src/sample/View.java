@@ -32,7 +32,7 @@ public class View implements IView {
         //Création de l'architecture de la page
         GridPane calculatrice = new GridPane();
 
-        //Création de l'un label général de la page
+        //Création d'un label général de la page
 
         //Création des boutons
         Button b1 = new Button("1");
@@ -52,6 +52,9 @@ public class View implements IView {
         Button b_div = new Button("/");
         Button b_push = new Button("⏎");
         Button b_backspace = new Button("⌫");
+        Button b_swap = new Button ("↔");
+        Button b_drop = new Button ("⏏");
+        Button b_clear = new Button ("⌧");
 
         //Implémentation des touches ( calculatrice.add(column, row) )
         calculatrice.add(affichage_direct, 0, 0);
@@ -74,6 +77,9 @@ public class View implements IView {
         calculatrice.add(b_div, 3, 4);
         calculatrice.add(b_neg, 2, 4);
         calculatrice.add(b_push, 4, 2);
+        calculatrice.add(b_swap,4,3);
+        calculatrice.add(b_drop,4,4);
+        calculatrice.add(b_clear,5,1);
 
         //Création des actions des boutons
         b0.addEventHandler(ActionEvent.ACTION,
@@ -144,6 +150,18 @@ public class View implements IView {
                 e -> {
                     view_control.gestion_bouton("-");
                 });
+        b_swap.addEventHandler(ActionEvent.ACTION,
+                e -> {
+                    view_control.gestion_bouton("swap");
+                });
+        b_drop.addEventHandler(ActionEvent.ACTION,
+                e -> {
+                    view_control.gestion_bouton("drop");
+                });
+        b_clear.addEventHandler(ActionEvent.ACTION,
+                e -> {
+                    view_control.gestion_bouton("clear");
+                });
 
         //Style des boutons
         b0.getStyleClass().add("glass-grey");
@@ -163,6 +181,9 @@ public class View implements IView {
         b_div.getStyleClass().add("glass-grey");
         b_push.getStyleClass().add("glass-grey");
         b_sub.getStyleClass().add("glass-grey");
+        b_swap.getStyleClass().add("glass-grey");
+        b_drop.getStyleClass().add("glass-grey");
+        b_clear.getStyleClass().add("glass-grey");
 
         //Style des Label
         affichage_direct.getStyleClass().add("label");
@@ -189,6 +210,10 @@ public class View implements IView {
         if (len > 0 & len < 2) {
             this.affichage_2_pre.setText("..");
             this.affichage_pre.setText(String.valueOf(liste_affichage.get(len - 1)));
+        }
+        if (len==0) {
+            this.affichage_pre.setText("..");
+            this.affichage_2_pre.setText("..");
         }
     }
 

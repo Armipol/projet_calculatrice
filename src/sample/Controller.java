@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.beans.*;
 import java.util.ArrayList;
 
-public class Controller extends Application  implements PropertyChangeListener, EventHandler {
+public class Controller extends Application implements PropertyChangeListener, EventHandler {
     Accumulateur accumulateur;
     View view;
     Pile pile;
@@ -46,6 +46,12 @@ public class Controller extends Application  implements PropertyChangeListener, 
             accumulateur.push();
         } else if (s == ".") {
             accumulateur.accumuler(".");
+        } else if (s == "swap") {
+            accumulateur.swap();
+        } else if (s == "drop") {
+            accumulateur.drop();
+        } else if (s == "clear") {
+            accumulateur.reset();
         }
     }
 
