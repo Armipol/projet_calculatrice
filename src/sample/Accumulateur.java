@@ -3,6 +3,18 @@ package sample;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * <h3>L'Accumulateur</h3>
+ * <p>
+ * En plus des informations fournis par le Javadoc de l'interface Accumulateur, ce Javadoc va décrire la relation avec la Pile et le Controlleur.
+ *
+ * @author Mario
+ * @see Pile
+ * @see Controller
+ * </p>
+ */
+
+
 public class Accumulateur implements IAccumulateur {
 
     private String value = "";
@@ -11,6 +23,11 @@ public class Accumulateur implements IAccumulateur {
     private String error = "";
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
+    /**
+     * Le constructeur affecte à l'Accumulateur la Pile dont il à besoin pour stocker ses résultats.
+     *
+     * @param pile une pile définit par la classe Pile.
+     */
     public Accumulateur(Pile pile) {
         this.pile = pile;
     }
@@ -35,7 +52,7 @@ public class Accumulateur implements IAccumulateur {
             afficher_error(error);
         } else {
             pile.drop();
-            error="";
+            error = "";
         }
     }
 
@@ -46,7 +63,7 @@ public class Accumulateur implements IAccumulateur {
             afficher_error(error);
         } else {
             pile.swap();
-            error="";
+            error = "";
         }
     }
 
@@ -59,7 +76,7 @@ public class Accumulateur implements IAccumulateur {
             double d1 = (double) pile.pop();
             double d2 = (double) pile.pop();
             pile.push(d1 + d2);
-            error="";
+            error = "";
         }
     }
 
@@ -72,7 +89,7 @@ public class Accumulateur implements IAccumulateur {
             double d1 = (double) pile.pop();
             double d2 = (double) pile.pop();
             pile.push(d1 - d2);
-            error="";
+            error = "";
         }
     }
 
@@ -85,7 +102,7 @@ public class Accumulateur implements IAccumulateur {
             double d1 = (double) pile.pop();
             double d2 = (double) pile.pop();
             pile.push(d1 * d2);
-            error="";
+            error = "";
         }
     }
 
@@ -102,7 +119,7 @@ public class Accumulateur implements IAccumulateur {
                 double d1 = (double) pile.pop();
                 double d2 = (double) pile.pop();
                 pile.push(d1 / d2);
-                error="";
+                error = "";
             }
         }
     }
@@ -115,10 +132,13 @@ public class Accumulateur implements IAccumulateur {
         } else {
             double db = (double) pile.pop();
             pile.push(-db);
-            error="";
+            error = "";
         }
     }
 
+    /**
+     * La méthode cos permet de faire calculer la valeur du cosinus associé à la dernière valeur push dans la Pile.
+     */
     public void cos() {
         if (pile.size() < 1) {
             error = "Impossible, rien à mettre dans le cos";
@@ -126,10 +146,13 @@ public class Accumulateur implements IAccumulateur {
         } else {
             double db = (double) pile.pop();
             pile.push(Math.cos(db));
-            error="";
+            error = "";
         }
     }
 
+    /**
+     * La méthode sin permet de faire calculer la valeur du sinus associé à la dernière valeur push dans la Pile.
+     */
     public void sin() {
         if (pile.size() < 1) {
             error = "Impossible, rien à mettre dans le sin";
@@ -137,10 +160,13 @@ public class Accumulateur implements IAccumulateur {
         } else {
             double db = (double) pile.pop();
             pile.push(Math.sin(db));
-            error="";
+            error = "";
         }
     }
 
+    /**
+     * La méthode tan permet de faire calculer la valeur du tangeante associé à la dernière valeur push dans la Pile.
+     */
     public void tan() {
         if (pile.size() < 1) {
             error = "Impossible, rien à mettre dans le tan";
@@ -148,7 +174,7 @@ public class Accumulateur implements IAccumulateur {
         } else {
             double db = (double) pile.pop();
             pile.push(Math.tan(db));
-            error="";
+            error = "";
         }
     }
 
@@ -160,7 +186,7 @@ public class Accumulateur implements IAccumulateur {
         } else {
             nombre = nombre.substring(0, nombre.length() - 1);
             setValue(nombre);
-            error="";
+            error = "";
         }
     }
 
@@ -176,11 +202,14 @@ public class Accumulateur implements IAccumulateur {
     }
 
     @Override
-    public void reset() {
+    public void clear() {
         pile.clear();
     }
 
-
+    /**
+     * @param listener
+     * @see PropertyChangeListener
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.pcs.addPropertyChangeListener(listener);
     }
@@ -189,12 +218,22 @@ public class Accumulateur implements IAccumulateur {
         return value;
     }
 
+    /**
+     * La méthode setValue permet de prévenir l'Accumulateur des changements pour l'affichage direct.
+     *
+     * @param s_affiche la valeur de l'affichage direct. Il est l'équivalent de nombre mais pour être envoyé à l'Accumulateur.
+     */
     public void setValue(String s_affiche) {
         String oldValue = this.value;
         this.value = s_affiche;
         pcs.firePropertyChange("value", oldValue, s_affiche);
     }
 
+    /**
+     * La méthode afficher_error est celle qui va permettre au Controlleur de savoir si des erreurs sont repérées dans l'Accumulateur pour ensuite les faire parvenir à la View et avertir l'utilisateur.
+     *
+     * @param err une String représentant l'erreur à afficher
+     */
     public void afficher_error(String err) {
         pcs.firePropertyChange("error", "", err);
     }

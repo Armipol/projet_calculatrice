@@ -4,15 +4,22 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * <h3>L'Accumulateur</h3>
+ * <p>
+ * En plus des informations fournis par le Javadoc de l'interface View, ce Javadoc va décrire plus en détails l'interface graphique définit dans cette classe.
+ *
+ * @author Mario
+ * @author Rémi
+ * @see Controller
+ * </p>
+ */
 public class View implements IView {
     Stage st;
     ArrayList<String> liste_affichage;
@@ -23,12 +30,21 @@ public class View implements IView {
 
     Controller view_control;
 
+    /**
+     * Le constructeur affecte à la View le Controlleur qui pourra analyser les résultats des actions sur les boutons.
+     *
+     * @param st         un Stage qui va acceuillir l'interface graphique.
+     * @param controller Le Controlleur associé à l'interface graphique.
+     */
     public View(Stage st, Controller controller) throws Exception {
         //Definition de la page
         this.st = st;
         view_control = controller;
     }
 
+    /**
+     * La méthode affiche permet de remplir l'interface graphique à l'aide de boutons/label.
+     */
     @Override
     public void affiche() {
         st.setTitle("Calculatrice");
@@ -189,8 +205,6 @@ public class View implements IView {
                 e -> {
                     view_control.gestion_bouton("tan");
                 });
-
-
 
 
         //Style des boutons
