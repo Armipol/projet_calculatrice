@@ -8,14 +8,14 @@ package sample;
  * Une classe implémentée par cette interface fonctionne de pair avec une Pile.
  * De plus, il fonctionne avec un Controlleur.
  *
- * @author Rémi
  * @author Mario
  * @see Pile
  * @see Controller
  * </p>
  */
 
-interface IAccumulateur {
+public interface IAccumulateur {
+
     /**
      * La méthode push permet de faire rentrer une valeur dans la Pile associée à l'Accumulateur.
      */

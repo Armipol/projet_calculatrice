@@ -3,15 +3,14 @@ package sample;
 import java.util.ArrayList;
 
 /**
- * <h3>Interface de la View -- Interface graphique de notre calculatrice</h3>
+ * <h3>Interface graphique de notre calculatrice</h3>
  * <p>
  * L'interface View définie les standards de la partie affichage de notre calculatrice. Elle définie les méthodes nécessaires pour le bon fonctionnement de cette dernière.
- * L'interface possède un constructeur par d * De plus, il fonctionne avec un Controlleur.
-éfaut.
+ * L'interface possède un constructeur par défaut.
+ * De plus, il fonctionne avec un Controlleur.
  * Une classe implémentée par cette interface fonctionne de pair avec un Controlleur.
  *
  * @author Rémi
- * @author Mario
  * @see Controller
  * </p>
  */

@@ -1,12 +1,8 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -30,7 +26,7 @@ import java.util.ArrayList;
  * </p>
  */
 
-public class Controller extends Application implements ActionListener, PropertyChangeListener, EventHandler, KeyListener {
+public class Controller extends Application implements PropertyChangeListener, KeyListener {
     Accumulateur accumulateur;
     View view;
     Pile pile;
@@ -117,29 +113,21 @@ public class Controller extends Application implements ActionListener, PropertyC
     }
 
     @Override
-    public void handle(Event event) {
-
-    }
-
-    @Override
     public void keyTyped(KeyEvent e) {
+        System.out.println("YOOO");
 
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        System.out.println(key);
+        System.out.println("YOOO");
+
     }
 
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        System.out.println("YOOO");
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }
