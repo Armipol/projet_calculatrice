@@ -1,11 +1,13 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 public class View implements IView {
     Stage st;
     ArrayList<String> liste_affichage;
+    Label affichage_erreur = new Label("..");
     Label affichage_direct = new Label("..");
     Label affichage_pre = new Label("..");
     Label affichage_2_pre = new Label("..");
@@ -30,9 +33,9 @@ public class View implements IView {
     public void affiche() {
         st.setTitle("Calculatrice");
         //Création de l'architecture de la page
-        GridPane calculatrice = new GridPane();
-
-        //Création d'un label général de la page
+        VBox calculatrice = new VBox();
+        VBox calcultrice_affichage = new VBox();
+        GridPane calculatrice_boutons = new GridPane();
 
         //Création des boutons
         Button b1 = new Button("1");
@@ -52,34 +55,39 @@ public class View implements IView {
         Button b_div = new Button("/");
         Button b_push = new Button("⏎");
         Button b_backspace = new Button("⌫");
-        Button b_swap = new Button ("↔");
-        Button b_drop = new Button ("⏏");
-        Button b_clear = new Button ("⌧");
+        Button b_swap = new Button("↔");
+        Button b_drop = new Button("⏏");
+        Button b_clear = new Button("⌧");
+        Button b_dot = new Button(".");
+        Button b_cos = new Button("cos°");
+        Button b_sin = new Button("sin°");
+        Button b_tan = new Button("tan°");
 
         //Implémentation des touches ( calculatrice.add(column, row) )
-        calculatrice.add(affichage_direct, 0, 0);
-        calculatrice.add(affichage_pre, 2, 0);
-        calculatrice.add(affichage_2_pre, 4, 0);
-        calculatrice.add(b7, 0, 1);
-        calculatrice.add(b8, 1, 1);
-        calculatrice.add(b9, 2, 1);
-        calculatrice.add(b4, 0, 2);
-        calculatrice.add(b5, 1, 2);
-        calculatrice.add(b6, 2, 2);
-        calculatrice.add(b1, 0, 3);
-        calculatrice.add(b2, 1, 3);
-        calculatrice.add(b3, 2, 3);
-        calculatrice.add(b0, 0, 4);
-        calculatrice.add(b_backspace, 4, 1);
-        calculatrice.add(b_add, 3, 1);
-        calculatrice.add(b_sub, 3, 2);
-        calculatrice.add(b_mult, 3, 3);
-        calculatrice.add(b_div, 3, 4);
-        calculatrice.add(b_neg, 2, 4);
-        calculatrice.add(b_push, 4, 2);
-        calculatrice.add(b_swap,4,3);
-        calculatrice.add(b_drop,4,4);
-        calculatrice.add(b_clear,5,1);
+        calculatrice_boutons.add(b7, 0, 1);
+        calculatrice_boutons.add(b8, 1, 1);
+        calculatrice_boutons.add(b9, 2, 1);
+        calculatrice_boutons.add(b4, 0, 2);
+        calculatrice_boutons.add(b5, 1, 2);
+        calculatrice_boutons.add(b6, 2, 2);
+        calculatrice_boutons.add(b1, 0, 3);
+        calculatrice_boutons.add(b2, 1, 3);
+        calculatrice_boutons.add(b3, 2, 3);
+        calculatrice_boutons.add(b0, 0, 4);
+        calculatrice_boutons.add(b_dot, 1, 4);
+        calculatrice_boutons.add(b_backspace, 4, 1);
+        calculatrice_boutons.add(b_add, 3, 1);
+        calculatrice_boutons.add(b_sub, 3, 2);
+        calculatrice_boutons.add(b_mult, 3, 3);
+        calculatrice_boutons.add(b_div, 3, 4);
+        calculatrice_boutons.add(b_neg, 2, 4);
+        calculatrice_boutons.add(b_push, 4, 2);
+        calculatrice_boutons.add(b_swap, 4, 3);
+        calculatrice_boutons.add(b_drop, 4, 4);
+        calculatrice_boutons.add(b_clear, 5, 1);
+        calculatrice_boutons.add(b_cos, 5, 2);
+        calculatrice_boutons.add(b_sin, 5, 3);
+        calculatrice_boutons.add(b_tan, 5, 4);
 
         //Création des actions des boutons
         b0.addEventHandler(ActionEvent.ACTION,
@@ -162,6 +170,26 @@ public class View implements IView {
                 e -> {
                     view_control.gestion_bouton("clear");
                 });
+        b_dot.addEventHandler(ActionEvent.ACTION,
+                e -> {
+                    view_control.gestion_bouton(".");
+                });
+
+        b_cos.addEventHandler(ActionEvent.ACTION,
+                e -> {
+                    view_control.gestion_bouton("cos");
+                });
+
+        b_sin.addEventHandler(ActionEvent.ACTION,
+                e -> {
+                    view_control.gestion_bouton("sin");
+                });
+
+        b_tan.addEventHandler(ActionEvent.ACTION,
+                e -> {
+                    view_control.gestion_bouton("tan");
+                });
+
 
         //Style des boutons
         b0.getStyleClass().add("glass-grey");
@@ -174,6 +202,7 @@ public class View implements IView {
         b7.getStyleClass().add("glass-grey");
         b8.getStyleClass().add("glass-grey");
         b9.getStyleClass().add("glass-grey");
+        b_dot.getStyleClass().add("glass-grey");
         b_add.getStyleClass().add("glass-grey");
         b_neg.getStyleClass().add("glass-grey");
         b_mult.getStyleClass().add("glass-grey");
@@ -184,17 +213,30 @@ public class View implements IView {
         b_swap.getStyleClass().add("glass-grey");
         b_drop.getStyleClass().add("glass-grey");
         b_clear.getStyleClass().add("glass-grey");
+        b_cos.getStyleClass().add("glass-grey");
+        b_sin.getStyleClass().add("glass-grey");
+        b_tan.getStyleClass().add("glass-grey");
 
         //Style des Label
-        affichage_direct.getStyleClass().add("label");
-
+        calculatrice.setAlignment(Pos.CENTER);
+        calculatrice.setStyle("-fx-font-size: 1.5em ; ");
+        calcultrice_affichage.setAlignment(Pos.CENTER_RIGHT);
 
         //Gestion du style de la GridPane
-        calculatrice.getStyleClass().add("main");
-        calculatrice.getStylesheets().add("sample/calculatrice.css");
+        calculatrice_boutons.getStylesheets().add("sample/calculatrice.css");
+        calculatrice_boutons.getStyleClass().add("main");
+        calculatrice_boutons.setHgap(20);
+        calculatrice_boutons.setVgap(20);
 
 
         //Incrémentation dans la page
+        calculatrice.getChildren().add(new Label("Calculatrice de Mario et Rémi"));
+        calcultrice_affichage.getChildren().add(affichage_erreur);
+        calcultrice_affichage.getChildren().add(affichage_2_pre);
+        calcultrice_affichage.getChildren().add(affichage_pre);
+        calcultrice_affichage.getChildren().add(affichage_direct);
+        calculatrice.getChildren().add(calcultrice_affichage);
+        calculatrice.getChildren().add(calculatrice_boutons);
         Scene scene_principal = new Scene(calculatrice);
         st.setScene(scene_principal);
         st.show();
@@ -211,7 +253,7 @@ public class View implements IView {
             this.affichage_2_pre.setText("..");
             this.affichage_pre.setText(String.valueOf(liste_affichage.get(len - 1)));
         }
-        if (len==0) {
+        if (len == 0) {
             this.affichage_pre.setText("..");
             this.affichage_2_pre.setText("..");
         }

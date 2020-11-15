@@ -53,6 +53,12 @@ public class Controller extends Application implements PropertyChangeListener, E
             accumulateur.drop();
         } else if (s == "clear") {
             accumulateur.reset();
+        } else if (s == "cos") {
+            accumulateur.cos();
+        } else if (s == "sin") {
+            accumulateur.sin();
+        } else if (s == "tan") {
+            accumulateur.tan();
         }
     }
 
@@ -95,8 +101,11 @@ public class Controller extends Application implements PropertyChangeListener, E
         if (propertyChangeEvent.getPropertyName()=="value") {
             view.change((String) propertyChangeEvent.getNewValue());
         }
+        if (propertyChangeEvent.getPropertyName()=="error") {
+            view.change((String) propertyChangeEvent.getNewValue());
+        }
         if (propertyChangeEvent.getPropertyName()=="modification") {
-            view.change(pile.liste_valeur);
+            view.change((ArrayList<Double>) propertyChangeEvent.getNewValue());
         }
     }
 

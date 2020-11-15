@@ -8,10 +8,12 @@ public class Accumulateur implements IAccumulateur {
     private String value = "";
     private String nombre = "";
     public Pile pile;
+    private String error = "";
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public Accumulateur(Pile pile){
-        this.pile = pile;    }
+    public Accumulateur(Pile pile) {
+        this.pile = pile;
+    }
 
     @Override
     public void push() {
@@ -19,85 +21,146 @@ public class Accumulateur implements IAccumulateur {
             pile.push(Double.parseDouble(nombre));
             setValue("");
             nombre = "";
+            error = "";
         } else {
-            System.out.println("Impossible de push car aucun chiffre");
+            error = "Impossible de push car aucun chiffre";
+            afficher_error(error);
         }
     }
 
     @Override
     public void drop() {
         if (pile.size() < 1) {
-            System.out.println("Impossible, rien à droper");
-        } else
+            error = "Impossible, rien à droper";
+            afficher_error(error);
+        } else {
             pile.drop();
+            error="";
+        }
     }
 
     @Override
     public void swap() {
-        pile.swap();
+        if (pile.size() < 2) {
+            error = "Impossible de swapper, il manque des chiffres";
+            afficher_error(error);
+        } else {
+            pile.swap();
+            error="";
+        }
     }
 
     @Override
     public void add() {
         if (pile.size() < 2) {
-            System.out.println("Impossible d'additioner, il manque des opérandes");
+            error = "Impossible d'additioner, il manque des opérandes";
+            afficher_error(error);
         } else {
             double d1 = (double) pile.pop();
             double d2 = (double) pile.pop();
             pile.push(d1 + d2);
+            error="";
         }
     }
 
     @Override
     public void sub() {
         if (pile.size() < 2) {
-            System.out.println("Impossible de soustraire, il manque des opérandes");
+            error = "Impossible de soustraire, il manque des opérandes";
+            afficher_error(error);
         } else {
             double d1 = (double) pile.pop();
             double d2 = (double) pile.pop();
             pile.push(d1 - d2);
+            error="";
         }
     }
 
     @Override
     public void mult() {
         if (pile.size() < 2) {
-            System.out.println("Impossible de multiplier, il manque des opérandes");
+            error = "Impossible de multiplier, il manque des opérandes";
+            afficher_error(error);
         } else {
             double d1 = (double) pile.pop();
             double d2 = (double) pile.pop();
             pile.push(d1 * d2);
+            error="";
         }
     }
 
     @Override
     public void div() {
-        if (pile.size() < 2) {
-            System.out.println("Impossible de diviser, il manque des opérandes");
+        if (pile.est_nul()) {
+            error = "On ne divise pas par 0";
+            afficher_error(error);
         } else {
-            double d1 = (double) pile.pop();
-            double d2 = (double) pile.pop();
-            pile.push(d1 / d2);
+            if (pile.size() < 2) {
+                error = "Impossible de diviser, il manque des opérandes";
+                afficher_error(error);
+            } else {
+                double d1 = (double) pile.pop();
+                double d2 = (double) pile.pop();
+                pile.push(d1 / d2);
+                error="";
+            }
         }
     }
 
     @Override
     public void neg() {
         if (pile.size() < 1) {
-            System.out.println("Impossible, rien à négativer");
+            error = "Impossible, rien à négativer";
+            afficher_error(error);
         } else {
             double db = (double) pile.pop();
             pile.push(-db);
+            error="";
+        }
+    }
+
+    public void cos() {
+        if (pile.size() < 1) {
+            error = "Impossible, rien à mettre dans le cos";
+            afficher_error(error);
+        } else {
+            double db = (double) pile.pop();
+            pile.push(Math.cos(db));
+            error="";
+        }
+    }
+
+    public void sin() {
+        if (pile.size() < 1) {
+            error = "Impossible, rien à mettre dans le sin";
+            afficher_error(error);
+        } else {
+            double db = (double) pile.pop();
+            pile.push(Math.sin(db));
+            error="";
+        }
+    }
+
+    public void tan() {
+        if (pile.size() < 1) {
+            error = "Impossible, rien à mettre dans le tan";
+            afficher_error(error);
+        } else {
+            double db = (double) pile.pop();
+            pile.push(Math.tan(db));
+            error="";
         }
     }
 
     @Override
     public void backspace() {
         if (nombre.length() < 1) {
-            System.out.println("Impossible de backspace car pas de chiffre");
+            error = "Impossible de backspace car pas de chiffre";
+            afficher_error(error);
         } else {
             nombre = nombre.substring(0, nombre.length() - 1);
             setValue(nombre);
+            error="";
         }
     }
 
@@ -132,6 +195,9 @@ public class Accumulateur implements IAccumulateur {
         pcs.firePropertyChange("value", oldValue, s_affiche);
     }
 
+    public void afficher_error(String err) {
+        pcs.firePropertyChange("error", "", err);
+    }
 
 
 }
