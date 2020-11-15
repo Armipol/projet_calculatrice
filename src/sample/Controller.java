@@ -43,6 +43,8 @@ public class Controller extends Application implements ActionListener, PropertyC
         view.affiche();
         accumulateur.addPropertyChangeListener(this);
         pile.addPropertyChangeListener(this);
+        accumulateur.addKeyListener(this);
+        pile.addKeyListener(this);
     }
 
     public static void main(String[] args) {
@@ -128,8 +130,10 @@ public class Controller extends Application implements ActionListener, PropertyC
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        System.out.println(key);
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            accumulateur.accumuler(0);
+            System.out.println(accumulateur);
+        }
     }
 
 

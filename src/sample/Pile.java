@@ -20,6 +20,7 @@ import java.util.Stack;
 public class Pile extends Stack {
 
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private PropertyChangeSupport pcs2 = new PropertyChangeSupport(this);
     private ArrayList<Double> liste_valeur = new ArrayList<>();
 
     /**
@@ -110,6 +111,8 @@ public class Pile extends Stack {
         pcs.firePropertyChange("modification", "", liste_valeur);
     }
 
-
+    public void addKeyListener (PropertyChangeListener key) {
+        this.pcs2.addPropertyChangeListener(key);
+    }
 }
 
