@@ -4,12 +4,18 @@ import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import java.beans.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
-public class Controller extends Application implements PropertyChangeListener, EventHandler {
+
+public class Controller extends Application implements ActionListener, PropertyChangeListener, EventHandler, KeyListener {
     Accumulateur accumulateur;
     View view;
     Pile pile;
@@ -23,7 +29,6 @@ public class Controller extends Application implements PropertyChangeListener, E
         accumulateur.addPropertyChangeListener(this);
         pile.addPropertyChangeListener(this);
     }
-
 
     public static void main(String[] args) {
         launch(args);
@@ -66,36 +71,6 @@ public class Controller extends Application implements PropertyChangeListener, E
         accumulateur.accumuler(i);
     }
 
-    public void gestion_clavier (String c){
-        if (c == "(-)") {
-            accumulateur.neg();
-        } else if (c == "+") {
-            accumulateur.add();
-        } else if (c == "-") {
-            accumulateur.sub();
-        } else if (c == "*") {
-            accumulateur.mult();
-        } else if (c == "/") {
-            accumulateur.div();
-        } else if (c == "back") {
-            accumulateur.backspace();
-        } else if (c == "push") {
-            accumulateur.push();
-        } else if (c == ".") {
-            accumulateur.accumuler(".");
-        } else if (c == "swap") {
-            accumulateur.swap();
-        } else if (c == "drop") {
-            accumulateur.drop();
-        } else if (c == "clear") {
-            accumulateur.reset();
-        }
-    }
-    public void gestion_clavier(int i) {
-        accumulateur.accumuler(i);
-    }
-
-
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         if (propertyChangeEvent.getPropertyName()=="value") {
@@ -111,6 +86,28 @@ public class Controller extends Application implements PropertyChangeListener, E
 
     @Override
     public void handle(Event event) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+        System.out.println(key);
+    }
+
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

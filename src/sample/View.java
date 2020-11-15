@@ -191,6 +191,8 @@ public class View implements IView {
                 });
 
 
+
+
         //Style des boutons
         b0.getStyleClass().add("glass-grey");
         b1.getStyleClass().add("glass-grey");
