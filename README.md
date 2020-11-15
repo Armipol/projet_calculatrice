@@ -17,7 +17,8 @@ Le programme principal permettant de lancer l'utilisation de la calculatrice est
   -> La classe View permet l'affichage graphique de la calculatrice (boutons, écran) et permet de collecter les actions de l'utilisateur via des ActionEvent
   
   -> La classe Controller qui permet de faire le lien entre le modèle mathématique de l'accumulateur et le modèle graphique de la View. C'est lui qui permet les échanges d'informations entre ces deux classes et permet le lancement ainsi que le fonctionnement de la calculatrice
-  
+
+
 
   
 ## Ce qui n'a pas été réalisé
