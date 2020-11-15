@@ -1,5 +1,6 @@
 package sample;
 
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -22,6 +23,7 @@ public class Accumulateur implements IAccumulateur {
     public Pile pile;
     private String error = "";
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private PropertyChangeSupport pcs2 = new PropertyChangeSupport(this);
 
     /**
      * Le constructeur affecte à l'Accumulateur la Pile dont il à besoin pour stocker ses résultats.
@@ -236,6 +238,10 @@ public class Accumulateur implements IAccumulateur {
      */
     public void afficher_error(String err) {
         pcs.firePropertyChange("error", "", err);
+    }
+
+    public void addKeyListener (PropertyChangeListener key) {
+        this.pcs2.addPropertyChangeListener(key);
     }
 
 

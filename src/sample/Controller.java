@@ -1,8 +1,12 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -26,7 +30,7 @@ import java.util.ArrayList;
  * </p>
  */
 
-public class Controller extends Application implements PropertyChangeListener, KeyListener {
+public class Controller extends Application implements ActionListener, PropertyChangeListener, EventHandler, KeyListener {
     Accumulateur accumulateur;
     View view;
     Pile pile;
@@ -39,6 +43,8 @@ public class Controller extends Application implements PropertyChangeListener, K
         view.affiche();
         accumulateur.addPropertyChangeListener(this);
         pile.addPropertyChangeListener(this);
+        accumulateur.addKeyListener(this);
+        pile.addKeyListener(this);
     }
 
     public static void main(String[] args) {
@@ -113,21 +119,31 @@ public class Controller extends Application implements PropertyChangeListener, K
     }
 
     @Override
+    public void handle(Event event) {
+
+    }
+
+    @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("YOOO");
 
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("YOOO");
-
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            accumulateur.accumuler(0);
+            System.out.println(accumulateur);
+        }
     }
 
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("YOOO");
+
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
